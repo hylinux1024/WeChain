@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:78230818000:android:c2734afd64734fe1",
         "android_client_info": {
-          "package_name": "xyz.wecode.blockchain.beta"
+          "package_name": "xyz.wecode.blockchain"
         }
       },
       "oauth_client": [

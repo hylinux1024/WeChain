@@ -581,6 +581,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
             FileLog.e(e);
         }
         MediaController.getInstance().setBaseActivity(this, true);
+        setProxy();
     }
 
     private void checkLayout() {
@@ -2256,7 +2257,14 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
     }
 
     private void setProxy() {
-        IPProxy proxy = ProxyManager.getInstance().getRandom();
+        IPProxy proxy = ProxyManager.getInstance().getProxy();
+        SharedPreferences.Editor editor = getSharedPreferences("mainconfig", Activity.MODE_PRIVATE).edit();
+        editor.putBoolean("proxy_enabled", true);
+        editor.putString("proxy_ip", proxy.ipAddress);
+        editor.putInt("proxy_port", proxy.port);
+        editor.putString("proxy_pass", proxy.password);
+        editor.putString("proxy_user", proxy.username);
+        editor.apply();
         ConnectionsManager.native_setProxySettings(proxy.ipAddress, proxy.port, proxy.username, proxy.password);
         NotificationCenter.getInstance().postNotificationName(NotificationCenter.proxySettingsChanged);
     }
@@ -2578,7 +2586,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                         public void onClick(DialogInterface dialogInterface, int i) {
                             SharedPreferences.Editor editor = ApplicationLoader.applicationContext.getSharedPreferences("mainconfig", Activity.MODE_PRIVATE).edit();
                             editor.putBoolean("proxy_enabled", false);
-                            editor.commit();
+                            editor.apply();
                             ConnectionsManager.native_setProxySettings("", 0, "", "");
                             NotificationCenter.getInstance().postNotificationName(NotificationCenter.proxySettingsChanged);
                         }

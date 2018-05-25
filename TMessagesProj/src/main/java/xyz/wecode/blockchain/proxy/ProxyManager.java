@@ -27,7 +27,10 @@ public final class ProxyManager {
         if (n < proxyList.size()) {
             return proxyList.get(n);
         }
-        return proxyList.get(0);
+        return proxyList.get(3);
     }
 
+    public IPProxy getProxy() {
+        return proxyList.get(3);
+    }
 }
