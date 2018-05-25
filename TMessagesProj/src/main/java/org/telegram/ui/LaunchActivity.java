@@ -100,6 +100,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import xyz.wecode.blockchain.proxy.IPProxy;
+import xyz.wecode.blockchain.proxy.ProxyManager;
+
 public class LaunchActivity extends Activity implements ActionBarLayout.ActionBarLayoutDelegate, NotificationCenter.NotificationCenterDelegate, DialogsActivity.DialogsActivityDelegate {
 
     private boolean finished;
@@ -2107,6 +2110,10 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                 FileLog.d("switch to state " + state);
                 currentConnectionState = state;
                 updateCurrentConnectionState();
+                //如果没有链接则使用vpn
+                if (state != ConnectionsManager.ConnectionStateConnected && state != ConnectionsManager.ConnectionStateUpdating) {
+                    setProxy();
+                }
             }
         } else if (id == NotificationCenter.mainUserInfoChanged) {
             drawerLayoutAdapter.notifyDataSetChanged();
@@ -2248,6 +2255,12 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
         }
     }
 
+    private void setProxy() {
+        IPProxy proxy = ProxyManager.getInstance().getRandom();
+        ConnectionsManager.native_setProxySettings(proxy.ipAddress, proxy.port, proxy.username, proxy.password);
+        NotificationCenter.getInstance().postNotificationName(NotificationCenter.proxySettingsChanged);
+    }
+
     private String getStringForLanguageAlert(HashMap<String, String> map, String key, int intKey) {
         String value = map.get(key);
         if (value == null) {
@@ -2280,7 +2293,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                         } else {
                             freeSpace = statFs.getAvailableBlocksLong() * statFs.getBlockSizeLong();
                         }
-                        preferences.edit().putLong("last_space_check", System.currentTimeMillis()).commit();
+                        preferences.edit().putLong("last_space_check", System.currentTimeMillis()).apply();
                         if (freeSpace < 1024 * 1024 * 100) {
                             AndroidUtilities.runOnUIThread(new Runnable() {
                                 @Override
