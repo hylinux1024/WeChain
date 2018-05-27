@@ -4,9 +4,11 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
-import android.widget.ImageView
 import kotlinx.android.synthetic.main.user_info_bar_layout.view.*
+import org.telegram.messenger.ContactsController
 import org.telegram.messenger.R
+import org.telegram.tgnet.TLRPC
+import org.telegram.ui.Components.AvatarDrawable
 
 class UserInfoBarLayout : FrameLayout {
 
@@ -44,17 +46,22 @@ class UserInfoBarLayout : FrameLayout {
         isClickable = true
     }
 
-    fun setUserInfo(username: String?, userId: String?) {
-        tvUserName.text = username
-        tvUserId.text = userId
+    fun setUserInfo(user: TLRPC.User) {
+        val name = ContactsController.formatName(user.first_name, user.last_name)
+        tvUserName.text = name
+        tvUserId.text = context?.getString(R.string.telegram_id, user.id)
+        val drawable = AvatarDrawable(user, true)
+        drawable.setDrawCircle(false)
+        ivUserAvatar.setImage(user.photo.photo_small, "60_60", drawable)
+//        ivUserAvatar.setImageDrawable(drawable)
     }
 
-    fun getUserAvatar(): ImageView {
-        return ivUserAvatar
-    }
-
-    fun getQRCodeIcon(): ImageView {
-        return ivQRCode
-    }
+//    fun getUserAvatar(): ImageView {
+//        return ivUserAvatar
+//    }
+//
+//    fun getQRCodeIcon(): ImageView {
+//        return ivQRCode
+//    }
 
 }

@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.telegram.messenger.FileLog;
+import org.telegram.messenger.R;
 import org.telegram.tgnet.ConnectionsManager;
 import org.telegram.ui.LaunchActivity;
 
@@ -33,7 +34,7 @@ public class BaseFragment {
     protected ActionBar actionBar;
     protected int classGuid = 0;
     protected Bundle arguments;
-    protected boolean swipeBackEnabled = true;
+    protected boolean swipeBackEnabled = false;
     protected boolean hasOwnBackground = false;
 
     public BaseFragment() {
@@ -90,6 +91,14 @@ public class BaseFragment {
 
     protected void onRemoveFromParent() {
 
+    }
+
+    protected <T> T find(int id) {
+        if (fragmentView == null) {
+            return null;
+        }
+        View view = fragmentView.findViewById(id);
+        return (T) view;
     }
 
     protected void setParentLayout(ActionBarLayout layout) {

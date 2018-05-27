@@ -19,8 +19,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Point;
-import android.graphics.Shader;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,15 +29,12 @@ import android.text.TextUtils;
 import android.view.ActionMode;
 import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import org.telegram.PhoneFormat.PhoneFormat;
@@ -102,6 +97,8 @@ import java.util.Map;
 
 import xyz.wecode.blockchain.proxy.IPProxy;
 import xyz.wecode.blockchain.proxy.ProxyManager;
+import xyz.wecode.blockchain.ui.DiscoverFragment;
+import xyz.wecode.blockchain.ui.MeFragment;
 import xyz.wecode.blockchain.widget.AlphaTabView;
 import xyz.wecode.blockchain.widget.AlphaTabsIndicator;
 
@@ -469,12 +466,13 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                 if (currIndex == tabNum) {
                     return;
                 }
+                BaseFragment fragment = chatFragment;
                 switch (tabNum) {
                     case 0://chat
                         if (chatFragment == null) {
                             chatFragment = new DialogsActivity(null);
                         }
-                        presentFragment(chatFragment, true, true);
+                        fragment = chatFragment;
                         break;
                     case 1://contacts
                         if (contactsFragment == null) {
@@ -483,17 +481,22 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                             args.putBoolean("needPhonebook", true);
                             contactsFragment = new ContactsActivity(args);
                         }
-                        presentFragment(contactsFragment, true, true);
+                        fragment = contactsFragment;
                         break;
                     case 2://discover
+                        if (discoverFragment == null) {
+                            discoverFragment = new DiscoverFragment();
+                        }
+                        fragment = discoverFragment;
                         break;
                     case 3://me
                         if (meFragment == null) {
-                            meFragment = new SettingsActivity();
+                            meFragment = new MeFragment();
                         }
-                        presentFragment(meFragment, true, true);
+                        fragment = meFragment;
                         break;
                 }
+                presentFragment(fragment, true, true);
                 currIndex = tabNum;
             }
         });

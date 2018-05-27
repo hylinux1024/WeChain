@@ -176,7 +176,8 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
                 }
             }
         } else {
-            actionBar.setTitle(LocaleController.getString("Contacts", R.string.Contacts));
+//            actionBar.setTitle(LocaleController.getString("Contacts", R.string.Contacts));
+            actionBar.setTitle(LocaleController.getString("AppName", R.string.AppName));
         }
 
         actionBar.setActionBarMenuOnItemClick(new ActionBar.ActionBarMenuOnItemClick() {
@@ -198,6 +199,7 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
                 if (addItem != null) {
                     addItem.setVisibility(View.GONE);
                 }
+                actionBar.getBackButton().setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -205,6 +207,7 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
                 if (addItem != null) {
                     addItem.setVisibility(View.VISIBLE);
                 }
+                actionBar.getBackButton().setVisibility(View.GONE);
                 searchListViewAdapter.searchDialogs(null);
                 searching = false;
                 searchWas = false;

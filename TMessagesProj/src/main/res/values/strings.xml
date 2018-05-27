@@ -1898,4 +1898,7 @@
     <string name="gallery">相册</string>
     <string name="sticker">表情</string>
     <string name="setting">设置</string>
+    <string name="telegram_id">电报号：%d</string>
+
+
 </resources>

@@ -233,6 +233,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             @Override
             public void onSearchExpand() {
                 searching = true;
+                actionBar.getBackButton().setVisibility(View.VISIBLE);
                 if (listView != null) {
                     if (searchString != null) {
                         listView.setEmptyView(searchEmptyView);
@@ -243,6 +244,9 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                     }
                 }
                 updatePasscodeButton();
+                if (getParentActivity() instanceof LaunchActivity) {
+                    ((LaunchActivity)getParentActivity()).showBottomTabLayout(false);
+                }
             }
 
             @Override
@@ -258,6 +262,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             public void onSearchCollapse() {
                 searching = false;
                 searchWas = false;
+                actionBar.getBackButton().setVisibility(View.VISIBLE);
                 if (listView != null) {
                     if (MessagesController.getInstance().loadingDialogs && MessagesController.getInstance().dialogs.isEmpty()) {
                         listView.setEmptyView(progressView);
@@ -281,6 +286,9 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                     dialogsSearchAdapter.searchDialogs(null);
                 }
                 updatePasscodeButton();
+                if (getParentActivity() instanceof LaunchActivity) {
+                    ((LaunchActivity)getParentActivity()).showBottomTabLayout(true);
+                }
             }
 
             @Override
@@ -312,10 +320,10 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                 actionBar.setTitle(LocaleController.getString("SelectChat", R.string.SelectChat));
             }
         } else {
+            actionBar.setBackButtonImage(R.drawable.ic_ab_back);
             if (searchString != null) {
-                actionBar.setBackButtonImage(R.drawable.ic_ab_back);
             } else {
-                actionBar.setBackButtonDrawable(new MenuDrawable());
+//                actionBar.setBackButtonDrawable(new MenuDrawable());
             }
             if (BuildVars.DEBUG_VERSION) {
                 actionBar.setTitle(LocaleController.getString("AppNameBeta", R.string.AppNameBeta));

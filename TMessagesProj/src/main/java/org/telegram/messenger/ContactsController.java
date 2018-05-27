@@ -2196,7 +2196,7 @@ public class ContactsController {
             if (firstName != null && firstName.length() > 0) {
                 result.append(firstName);
                 if (lastName != null && lastName.length() > 0) {
-                    result.append(" ");
+//                    result.append(" ");
                     result.append(lastName);
                 }
             } else if (lastName != null && lastName.length() > 0) {
@@ -2206,7 +2206,7 @@ public class ContactsController {
             if (lastName != null && lastName.length() > 0) {
                 result.append(lastName);
                 if (firstName != null && firstName.length() > 0) {
-                    result.append(" ");
+//                    result.append(" ");
                     result.append(firstName);
                 }
             } else if (firstName != null && firstName.length() > 0) {
