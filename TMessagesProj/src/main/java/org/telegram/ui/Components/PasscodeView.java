@@ -12,6 +12,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,12 +25,15 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Vibrator;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.os.CancellationSignal;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
+import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.ActionMode;
 import android.view.Gravity;
@@ -425,6 +429,28 @@ public class PasscodeView extends FrameLayout {
     public PasscodeView(final Context context) {
         super(context);
 
+        init(context);
+    }
+
+    public PasscodeView(@NonNull Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+
+        init(context);
+    }
+
+    public PasscodeView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+
+        init(context);
+    }
+
+    @TargetApi(21)
+    public PasscodeView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init(context);
+    }
+
+    private void init(Context context) {
         setWillNotDraw(false);
         setVisibility(GONE);
 

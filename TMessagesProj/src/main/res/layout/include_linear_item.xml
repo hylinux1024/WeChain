@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="46dp"
+    android:background="@drawable/selector_common_item_bg">
+
+    <ImageView
+        android:id="@+id/itemIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/icon_horizontal_margin"
+        android:layout_marginRight="@dimen/icon_horizontal_margin"
+        tools:src="@mipmap/ic_setting_blue" />
+
+    <TextView
+        android:id="@+id/itemTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/itemIcon"
+        android:layout_toLeftOf="@+id/itemRightTxt"
+        android:layout_toRightOf="@+id/itemIcon"
+        android:layout_toStartOf="@+id/itemRightTxt"
+        android:gravity="center_vertical"
+        android:textColor="@color/primaryText"
+        android:textSize="16sp"
+        tools:text="设置" />
+
+    <TextView
+        android:id="@+id/itemRightTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/icon_horizontal_margin"
+        android:layout_marginLeft="@dimen/icon_horizontal_margin"
+        android:layout_marginRight="@dimen/icon_horizontal_margin"
+        android:layout_marginStart="@dimen/icon_horizontal_margin"
+        android:textColor="@color/secondaryText"
+        android:textSize="16sp"
+        android:visibility="gone"
+        tools:text="进入"
+        tools:visibility="visible" />
+</RelativeLayout>

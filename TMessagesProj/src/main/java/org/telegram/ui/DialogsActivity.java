@@ -322,6 +322,9 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             } else {
                 actionBar.setTitle(LocaleController.getString("AppName", R.string.AppName));
             }
+            if (canShowBottomTabLayout()) {
+                actionBar.getBackButton().setVisibility(View.GONE);
+            }
         }
         actionBar.setAllowOverlayTitle(true);
 
@@ -1743,5 +1746,10 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
                 new ThemeDescription(null, 0, null, null, null, null, Theme.key_player_button),
                 new ThemeDescription(null, 0, null, null, null, null, Theme.key_player_buttonActive),
         };
+    }
+
+    @Override
+    public boolean canShowBottomTabLayout() {
+        return !onlySelect;
     }
 }

@@ -1874,4 +1874,10 @@ de múltiplos dispositivos.</string>
     <string name="formatterDay24H">HH:mm</string>
     <string name="formatterDay12H">h:mm a</string>
     <string name="formatDateAtTime">%1$s às %2$s</string>
+
+    <!--主界面-->
+    <string name="chat">Chat</string>
+    <string name="contacts">Contacts</string>
+    <string name="discovery">Discover</string>
+    <string name="me">Me</string>
 </resources>

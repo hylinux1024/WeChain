@@ -82,6 +82,7 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
     private boolean searchWas;
     private boolean searching;
     private boolean onlyUsers;
+    private boolean showBottomTab;
     private boolean needPhonebook;
     private boolean destroyAfterSelect;
     private boolean returnAsResult;
@@ -132,6 +133,8 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
             addingToChannel = arguments.getBoolean("addingToChannel", false);
             needFinishFragment = arguments.getBoolean("needFinishFragment", true);
             chat_id = arguments.getInt("chat_id", 0);
+            showBottomTab = arguments.getBoolean("showBottomTab", false);
+            needPhonebook = arguments.getBoolean("needPhonebook", false);
         } else {
             needPhonebook = true;
         }
@@ -159,6 +162,9 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
 
         actionBar.setBackButtonImage(R.drawable.ic_ab_back);
         actionBar.setAllowOverlayTitle(true);
+        if (canShowBottomTabLayout()) {
+            actionBar.getBackButton().setVisibility(View.GONE);
+        }
         if (destroyAfterSelect) {
             if (returnAsResult) {
                 actionBar.setTitle(LocaleController.getString("SelectContact", R.string.SelectContact));
@@ -285,7 +291,7 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
                             Bundle args = new Bundle();
                             args.putInt("user_id", user.id);
                             if (MessagesController.checkCanOpenChat(args, ContactsActivity.this)) {
-                                presentFragment(new ChatActivity(args), true);
+                                presentFragment(new ChatActivity(args), false);
                             }
                         }
                     }
@@ -328,7 +334,7 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
                                     presentFragment(new ChannelCreateActivity(args));
                                 } else {
                                     presentFragment(new ChannelIntroActivity());
-                                    preferences.edit().putBoolean("channel_intro", true).commit();
+                                    preferences.edit().putBoolean("channel_intro", true).apply();
                                 }
                             }
                         }
@@ -350,7 +356,7 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
                                     Bundle args = new Bundle();
                                     args.putInt("user_id", user.id);
                                     if (MessagesController.checkCanOpenChat(args, ContactsActivity.this)) {
-                                        presentFragment(new ChatActivity(args), true);
+                                        presentFragment(new ChatActivity(args), false);
                                     }
                                 }
                             }
@@ -589,7 +595,7 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
                 Bundle args2 = new Bundle();
                 args2.putInt("enc_id", encryptedChat.id);
                 NotificationCenter.getInstance().postNotificationName(NotificationCenter.closeChats);
-                presentFragment(new ChatActivity(args2), true);
+                presentFragment(new ChatActivity(args2), false);
             }
         } else if (id == NotificationCenter.closeChats) {
             if (!creatingChat) {
@@ -683,5 +689,9 @@ public class ContactsActivity extends BaseFragment implements NotificationCenter
                 new ThemeDescription(listView, 0, new Class[]{ProfileSearchCell.class}, Theme.dialogs_onlinePaint, null, null, Theme.key_windowBackgroundWhiteBlueText3),
                 new ThemeDescription(listView, 0, new Class[]{ProfileSearchCell.class}, Theme.dialogs_namePaint, null, null, Theme.key_chats_name),
         };
+    }
+    @Override
+    public boolean canShowBottomTabLayout() {
+        return showBottomTab;
     }
 }

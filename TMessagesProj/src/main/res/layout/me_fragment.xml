@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E9E9E9"
+    android:orientation="vertical">
+
+    <xyz.wecode.blockchain.widget.UserInfoBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        app:userIcon="@mipmap/ic_default_avatar"
+        app:userId="电报号：1133234"
+        app:userName="兰斯洛特" />
+
+    <xyz.wecode.blockchain.widget.LinearItemLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_common_item_bg"
+        app:itemIcon="@mipmap/ic_setting_blue"
+        app:itemTitle="@string/wallet" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:divider="@drawable/divider_left_right_padding"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <xyz.wecode.blockchain.widget.LinearItemLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemIcon="@mipmap/ic_setting_blue"
+            app:itemTitle="@string/collection" />
+
+        <xyz.wecode.blockchain.widget.LinearItemLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemIcon="@mipmap/ic_setting_blue"
+            app:itemTitle="@string/gallery" />
+
+        <xyz.wecode.blockchain.widget.LinearItemLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemIcon="@mipmap/ic_setting_blue"
+            app:itemTitle="@string/sticker" />
+    </LinearLayout>
+
+    <xyz.wecode.blockchain.widget.LinearItemLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:itemIcon="@mipmap/ic_setting_blue"
+        app:itemTitle="@string/Settings" />
+</LinearLayout>

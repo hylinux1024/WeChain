@@ -12,6 +12,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -159,6 +163,26 @@ public class ActionBarLayout extends FrameLayout {
 
     public ActionBarLayout(Context context) {
         super(context);
+        initView(context);
+    }
+
+    public ActionBarLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        initView(context);
+    }
+
+    public ActionBarLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initView(context);
+    }
+
+    @TargetApi(21)
+    public ActionBarLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        initView(context);
+    }
+
+    private void initView(Context context) {
         parentActivity = (Activity) context;
 
         if (layerShadowDrawable == null) {

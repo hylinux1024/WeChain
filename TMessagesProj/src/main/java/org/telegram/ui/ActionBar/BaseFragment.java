@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 
 import org.telegram.messenger.FileLog;
 import org.telegram.tgnet.ConnectionsManager;
+import org.telegram.ui.LaunchActivity;
 
 public class BaseFragment {
 
@@ -176,7 +177,7 @@ public class BaseFragment {
     }
 
     public void onResume() {
-
+        checkBottomTabLayout();
     }
 
     public void onPause() {
@@ -358,5 +359,23 @@ public class BaseFragment {
 
     public ThemeDescription[] getThemeDescriptions() {
         return null;
+    }
+
+    /**
+     * 是否显示底部tablayout，tab显示时，返回按钮就不显示
+     *
+     * @return
+     */
+    public boolean canShowBottomTabLayout() {
+        return false;
+    }
+
+    private void checkBottomTabLayout() {
+        Activity activity = getParentActivity();
+        if (activity instanceof LaunchActivity) {
+            boolean canShow = canShowBottomTabLayout();
+            ((LaunchActivity) activity).showBottomTabLayout(canShow);
+        }
+
     }
 }

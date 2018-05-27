@@ -13,12 +13,16 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -66,7 +70,26 @@ public class DrawerLayoutContainer extends FrameLayout {
 
     public DrawerLayoutContainer(Context context) {
         super(context);
+        init();
+    }
 
+    public DrawerLayoutContainer(@NonNull Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
+
+    public DrawerLayoutContainer(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    @TargetApi(21)
+    public DrawerLayoutContainer(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init();
+    }
+
+    private void init() {
         minDrawerMargin = (int) (MIN_DRAWER_MARGIN * AndroidUtilities.density + 0.5f);
         setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
         setFocusableInTouchMode(true);
