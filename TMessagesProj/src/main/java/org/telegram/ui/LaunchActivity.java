@@ -95,6 +95,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import xyz.wecode.blockchain.event.UnreadCountEvent;
 import xyz.wecode.blockchain.proxy.IPProxy;
 import xyz.wecode.blockchain.proxy.ProxyManager;
 import xyz.wecode.blockchain.ui.DiscoverFragment;
@@ -321,6 +322,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
         NotificationCenter.getInstance().addObserver(this, NotificationCenter.openArticle);
         NotificationCenter.getInstance().addObserver(this, NotificationCenter.hasNewContactsToImport);
         NotificationCenter.getInstance().addObserver(this, NotificationCenter.didSetNewTheme);
+        NotificationCenter.getInstance().addObserver(this, NotificationCenter.getUnreadCount);
 
         if (actionBarLayout.fragmentsStack.isEmpty()) {
             if (!UserConfig.isClientActivated()) {
@@ -453,6 +455,8 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
         }
         MediaController.getInstance().setBaseActivity(this, true);
         setProxy();
+
+
     }
 
     private void initView() {
@@ -1727,6 +1731,7 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
         NotificationCenter.getInstance().removeObserver(this, NotificationCenter.openArticle);
         NotificationCenter.getInstance().removeObserver(this, NotificationCenter.hasNewContactsToImport);
         NotificationCenter.getInstance().removeObserver(this, NotificationCenter.didSetNewTheme);
+        NotificationCenter.getInstance().removeObserver(this, NotificationCenter.getUnreadCount);
     }
 
     public void presentFragment(BaseFragment fragment) {
@@ -2175,6 +2180,15 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
                     //
                 }
             }
+        } else if (id == NotificationCenter.getUnreadCount) {//total unread count
+            final UnreadCountEvent event = (UnreadCountEvent) args[0];
+            AndroidUtilities.runOnUIThread(new Runnable() {
+                @Override
+                public void run() {
+                    tabChat.showNumber(event.getUnread());
+                }
+            });
+
         }
     }
 
@@ -2908,4 +2922,5 @@ public class LaunchActivity extends Activity implements ActionBarLayout.ActionBa
     public void showBottomTabLayout(boolean visible) {
         tabLayout.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
+
 }

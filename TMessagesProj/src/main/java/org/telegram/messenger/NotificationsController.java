@@ -44,6 +44,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import xyz.wecode.blockchain.event.UnreadCountEvent;
+
 public class NotificationsController {
 
     public static final String EXTRA_VOICE_REPLY = "extra_voice_reply";
@@ -84,6 +86,7 @@ public class NotificationsController {
     private AlarmManager alarmManager;
 
     private static volatile NotificationsController Instance = null;
+
     public static NotificationsController getInstance() {
         NotificationsController localInstance = Instance;
         if (localInstance == null) {
@@ -730,7 +733,7 @@ public class NotificationsController {
                             notifyOverride = 1;
                         }
                     }
-                    boolean canAddValue = !(notifyOverride == 2 || (!preferences.getBoolean("EnableAll", true) || ((int)dialog_id < 0) && !preferences.getBoolean("EnableGroup", true)) && notifyOverride == 0);
+                    boolean canAddValue = !(notifyOverride == 2 || (!preferences.getBoolean("EnableAll", true) || ((int) dialog_id < 0) && !preferences.getBoolean("EnableGroup", true)) && notifyOverride == 0);
 
                     Integer currentCount = pushDialogs.get(dialog_id);
                     Integer newCount = entry.getValue();
@@ -904,7 +907,8 @@ public class NotificationsController {
                     return;
                 }
                 lastBadgeCount = count;
-                NotificationBadge.applyCount(count);
+                NotificationCenter.getInstance().postNotificationName(NotificationCenter.getUnreadCount, new UnreadCountEvent(count));
+                NotificationBadge.applyCount(count >= 99 ? 99 : count);
             }
         });
     }
@@ -1728,7 +1732,7 @@ public class NotificationsController {
             Intent intent = new Intent(ApplicationLoader.applicationContext, LaunchActivity.class);
             intent.setAction("com.tmessages.openchat" + Math.random() + Integer.MAX_VALUE);
             intent.setFlags(32768);
-            if ((int)dialog_id != 0) {
+            if ((int) dialog_id != 0) {
                 if (pushDialogs.size() == 1) {
                     if (chat_id != 0) {
                         intent.putExtra("chatId", chat_id);
@@ -1976,12 +1980,12 @@ public class NotificationsController {
             TLRPC.User user = null;
             String name;
             if (dialog_id > 0) {
-                user = MessagesController.getInstance().getUser((int)dialog_id);
+                user = MessagesController.getInstance().getUser((int) dialog_id);
                 if (user == null) {
                     continue;
                 }
             } else {
-                chat = MessagesController.getInstance().getChat(-(int)dialog_id);
+                chat = MessagesController.getInstance().getChat(-(int) dialog_id);
                 if (chat == null) {
                     continue;
                 }
@@ -2096,16 +2100,16 @@ public class NotificationsController {
                 wearableExtender.addAction(wearReplyAction);
             }
 
-            String dismissalID=null;
-            if(chat!=null)
-                dismissalID="tgchat"+chat.id+"_"+max_id;
-            else if(user!=null)
-                dismissalID="tguser"+user.id+"_"+max_id;
+            String dismissalID = null;
+            if (chat != null)
+                dismissalID = "tgchat" + chat.id + "_" + max_id;
+            else if (user != null)
+                dismissalID = "tguser" + user.id + "_" + max_id;
 
             wearableExtender.setDismissalId(dismissalID);
 
-            NotificationCompat.WearableExtender summaryExtender=new NotificationCompat.WearableExtender();
-            summaryExtender.setDismissalId("summary_"+dismissalID);
+            NotificationCompat.WearableExtender summaryExtender = new NotificationCompat.WearableExtender();
+            summaryExtender.setDismissalId("summary_" + dismissalID);
             notificationBuilder.extend(summaryExtender);
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(ApplicationLoader.applicationContext)

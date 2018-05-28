@@ -138,6 +138,8 @@ public class NotificationCenter {
     public static final int didEndedCall = totalEvents++;
     public static final int closeInCallActivity = totalEvents++;
 
+    public static final int getUnreadCount = totalEvents++;//total unread count
+
     private SparseArray<ArrayList<Object>> observers = new SparseArray<>();
     private SparseArray<ArrayList<Object>> removeAfterBroadcast = new SparseArray<>();
     private SparseArray<ArrayList<Object>> addAfterBroadcast = new SparseArray<>();
