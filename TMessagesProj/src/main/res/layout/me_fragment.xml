@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E9E9E9"
+    android:background="@color/background"
     android:orientation="vertical">
 
     <xyz.wecode.blockchain.widget.UserInfoBarLayout
         android:id="@+id/userInfoBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="@dimen/content_vertical_margin"
+        android:layout_marginTop="@dimen/content_vertical_margin"
         app:userIcon="@mipmap/ic_default_avatar"
         app:userId="电报号：1133234"
         app:userName="兰斯洛特" />
@@ -26,7 +26,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/content_vertical_margin"
         android:divider="@drawable/divider_left_right_padding"
         android:orientation="vertical"
         android:showDividers="middle">
@@ -57,7 +57,7 @@
         android:id="@+id/itemSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/content_vertical_margin"
         app:itemIcon="@mipmap/ic_me_setting"
         app:itemTitle="@string/Settings" />
 </LinearLayout>

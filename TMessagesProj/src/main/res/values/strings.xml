@@ -1900,5 +1900,6 @@
     <string name="setting">设置</string>
     <string name="telegram_id">电报号：%d</string>
 
-
+    <!--发现-->
+    <string name="blockchain_circle">区块链圈</string>
 </resources>

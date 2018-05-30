@@ -5,4 +5,5 @@
     <color name="divider">#dcdcdc</color>
     <color name="listSelected">#D9D9D9</color>
     <color name="listDivider">#D2D2D2</color>
+    <color name="background">#E9E9E9</color>
 </resources>
