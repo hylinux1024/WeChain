@@ -41,7 +41,7 @@
         android:layout_marginRight="@dimen/icon_horizontal_margin"
         android:layout_marginStart="@dimen/icon_horizontal_margin"
         android:textColor="@color/secondaryText"
-        android:textSize="16sp"
+        android:textSize="12sp"
         android:visibility="gone"
         tools:text="进入"
         tools:visibility="visible" />

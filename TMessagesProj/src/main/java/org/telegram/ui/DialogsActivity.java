@@ -262,7 +262,7 @@ public class DialogsActivity extends BaseFragment implements NotificationCenter.
             public void onSearchCollapse() {
                 searching = false;
                 searchWas = false;
-                actionBar.getBackButton().setVisibility(View.VISIBLE);
+                actionBar.getBackButton().setVisibility(View.GONE);
                 if (listView != null) {
                     if (MessagesController.getInstance().loadingDialogs && MessagesController.getInstance().dialogs.isEmpty()) {
                         listView.setEmptyView(progressView);

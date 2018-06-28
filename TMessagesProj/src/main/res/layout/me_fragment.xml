@@ -58,6 +58,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/content_vertical_margin"
-        app:itemIcon="@mipmap/ic_me_setting"
+        app:itemIcon="@mipmap/ic_setting_blue"
         app:itemTitle="@string/Settings" />
 </LinearLayout>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/content_vertical_margin"
     android:paddingTop="@dimen/content_vertical_margin">
 
@@ -14,10 +15,43 @@
         app:itemIcon="@mipmap/ic_setting_blue"
         app:itemTitle="@string/blockchain_circle" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_vertical_margin"
+        android:divider="@drawable/divider_left_right_padding"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <xyz.wecode.blockchain.widget.LinearItemLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_common_item_bg"
+            app:itemIcon="@mipmap/ic_recommend"
+            app:itemRightText="@string/recommend_groups"
+            app:itemTitle="@string/recommendation" />
+
+        <xyz.wecode.blockchain.widget.LinearItemLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_common_item_bg"
+            app:itemIcon="@mipmap/ic_setting_blue"
+            app:itemTitle="@string/search_all" />
+    </LinearLayout>
+
     <xyz.wecode.blockchain.widget.LinearItemLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_vertical_margin"
         android:background="@drawable/selector_common_item_bg"
         app:itemIcon="@mipmap/ic_setting_blue"
-        app:itemTitle="@string/blockchain_circle" />
-</RelativeLayout>
+        app:itemTitle="@string/market" />
+
+    <xyz.wecode.blockchain.widget.LinearItemLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_vertical_margin"
+        android:background="@drawable/selector_common_item_bg"
+        app:itemIcon="@mipmap/ic_setting_blue"
+        app:itemTitle="@string/coin_info" />
+</LinearLayout>

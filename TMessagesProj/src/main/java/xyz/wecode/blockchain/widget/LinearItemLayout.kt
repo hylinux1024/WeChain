@@ -3,6 +3,7 @@ package xyz.wecode.blockchain.widget
 import android.annotation.TargetApi
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -46,6 +47,7 @@ class LinearItemLayout : RelativeLayout {
         val rightText = a.getResourceId(R.styleable.LinearItemLayout_itemRightText, 0)
         if (rightText > 0) {
             itemRightText.text = context.getString(rightText)
+            itemRightText.visibility = View.VISIBLE
         }
         a.recycle()
         isClickable = true
